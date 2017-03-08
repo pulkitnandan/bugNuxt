@@ -1,24 +1,9 @@
 import axios from 'axios'
 
-const urls = {
-  getMe: () => {
-    return `posts/1`
-  }
+let options = {}
+// The server-side needs a full url to works
+if (process.SERVER_BUILD) {
+  options.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
 }
 
-// Axois configuration
-const request = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com/",
-  headers: { 'content-type': 'application/json' }
-})
-
-const axiosResponseTransform = function (url) {
-  return function (response) {
-    return response.data
-  }
-}
-const get = async function (url) {
-  return request.get(url).then(axiosResponseTransform(url))
-}
-
-export { urls, get}
+export default axios.create(options)

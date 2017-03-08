@@ -4,7 +4,7 @@
   </footer>
 </template>
 <script>
-  import { get, urls } from '~plugins/axios'
+  import { get, urls } from '~plugins/api'
 
   export default {
     async data () {
